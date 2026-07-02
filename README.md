@@ -80,13 +80,13 @@ To demonstrate that Cepheid variables naturally group separate from common stars
 ### Step 2: Robust Period-Luminosity Fitting (RANSAC)
 Once the Cepheids are identified, they are used to fit the Leavitt Law.
 1. **Feature Formulation**:
-   - $X$: Logarithm of period ($\log_{10}(P)$) and apparent magnitude ($apparent\_mag$).
+   - $X$: Logarithm of period ($\log_{10}(P)$) and apparent magnitude ($m$).
    - $Y$: Logarithm of true distance ($\log_{10}(dist)$).
 2. **RANSAC Regression**: Standard Linear Regression is highly sensitive to outliers (e.g. false Cepheids from KMeans errors). To resolve this, a **RANSAC (Random Sample Consensus) Regressor** is trained:
    - It repeatedly selects random subsets of stars to fit linear equations.
    - It counts how many total stars match the model within a threshold (inliers).
    - It outputs the final linear coefficients $(w_1, w_2)$ and intercept $(b)$ using the best fit inlier plane:
-     $$\log_{10}(\text{dist}) = w_1 \log_{10}(P) + w_2 (\text{apparent\_mag}) + b$$
+     $$\log_{10}(\text{dist}) = w_1 \log_{10}(P) + w_2 m + b$$
 3. **3D Visualization**: Renders a 3D scatter plot of the data points color-coded by inlier/outlier status along with the fitted regression plane.
 
 ---
